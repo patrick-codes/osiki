@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:osiki/home.dart';
-import 'package:osiki/intro%20pages/login_screen.dart';
-import 'package:osiki/intro%20pages/register_screen.dart';
-
-//import 'home.dart';
+import 'package:osiki/features/intro%20pages/register_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +19,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const RegsiterScreen(),
     );
   }
 }

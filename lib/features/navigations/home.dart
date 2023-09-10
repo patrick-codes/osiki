@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:osiki/navigations/map_page.dart';
+import 'map_page.dart';
+import 'video_call.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -10,12 +10,140 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _callPrompt = "";
+  //final TimeOfDay _timeOfDay = TimeOfDay.now();
 
-  void _callCenter() {
+  //var _callPrompt = "";
+
+  /* void _callCenter() {
     setState(() {
       _callPrompt = "Help is underway..!!";
     });
+  }
+*/
+  void _snackBar(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        behavior: SnackBarBehavior.fixed,
+        content: Center(
+          child: (Text(
+            "Emergency Button Activated!!",
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
+          )),
+        ),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  Future _bottomDraw(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      builder: (context) => SizedBox(
+        height: 90,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                height: 50,
+                width: 150,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset.zero,
+                        color: Colors.grey,
+                        blurRadius: 10,
+                      )
+                    ]),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const VideoCallPage(),
+                      ),
+                    );
+                  },
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.video_call_rounded,
+                        size: 45,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Video Call",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                height: 50,
+                width: 150,
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: const [
+                      BoxShadow(
+                        offset: Offset.zero,
+                        color: Colors.grey,
+                        blurRadius: 10,
+                      )
+                    ]),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.call_rounded,
+                      size: 45,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "Voice Call",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+              //const SizedBox(width: 100),
+              /* Container(
+                height: 70,
+                width: 70,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(35),
+                  boxShadow: const [
+                    BoxShadow(
+                      offset: Offset.zero,
+                      color: Colors.grey,
+                      blurRadius: 10,
+                    )
+                  ],
+                ),
+                child: const Icon(
+                  Icons.person,
+                  size: 45,
+                  color: Colors.grey,
+                ),
+              ),
+            */
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -75,7 +203,35 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: <Widget>[
+            /*  Container(
+              height: 50,
+              width: 70,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(
+                  10,
+                ),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset.zero,
+                    blurRadius: 12,
+                  )
+                ],
+              ),
+              child: Center(
+                child: Text(
+                  "${_timeOfDay.hour} : ${_timeOfDay.minute}",
+                  style: const TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ),
+            */
             const Padding(
               padding: EdgeInsets.all(15.0),
               child: Row(
@@ -246,17 +402,19 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             const SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
-                _callPrompt,
-                style: const TextStyle(
+                "",
+                style: TextStyle(
                   color: Colors.white,
                 ),
               ),
             ),
             ElevatedButton(
-              onPressed: () => {},
+              onPressed: () {
+                _snackBar(context);
+              },
               style: const ButtonStyle(),
               child: const Text(
                 "ACTIVATE EMERGENCY",
@@ -268,7 +426,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
-        onPressed: _callCenter,
+        onPressed: () {
+          _bottomDraw(context);
+        },
         /*() {
           Navigator.push(
             context,
@@ -285,19 +445,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-/*Widget build(BuildContext context) {
-  return AlertDialog(
-    title: const Text("Help UnderWay"),
-    content: const Icon(Icons.help),
-    //elevation: 24.0,
-    backgroundColor: Colors.white,
-    actions: [
-      ElevatedButton(
-        onPressed: () => {},
-        child: const Text("CLOSE"),
-      ),
-    ],
-  );
-}
-*/

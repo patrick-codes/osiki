@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:osiki/home.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});

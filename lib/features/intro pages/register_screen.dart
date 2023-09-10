@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:osiki/features/intro%20pages/login_screen.dart';
 
 class RegsiterScreen extends StatefulWidget {
   const RegsiterScreen({super.key});
@@ -62,7 +63,7 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                     ),
                   ]),
                 ),
-                height: 350,
+                height: 380,
                 width: 50,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -84,7 +85,7 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Index Number"),
+                            const Text("Name"),
                             const SizedBox(height: 2.0),
                             Container(
                               decoration: BoxDecoration(
@@ -95,9 +96,29 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                                 autofocus: true,
                                 autocorrect: true,
                                 decoration: const InputDecoration(
-                                  hintText: 'index number',
+                                  hintText: 'name',
                                   border: InputBorder.none,
-                                  prefixIcon: Icon(Icons.email,
+                                  prefixIcon: Icon(Icons.person_2,
+                                      color: Color.fromARGB(255, 4, 52, 91)),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            const Text("Email"),
+                            const SizedBox(height: 2.0),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.amberAccent,
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: TextFormField(
+                                obscureText: true,
+                                autofocus: true,
+                                autocorrect: true,
+                                decoration: const InputDecoration(
+                                  hintText: 'email',
+                                  border: InputBorder.none,
+                                  prefixIcon: Icon(Icons.mail,
                                       color: Color.fromARGB(255, 4, 52, 91)),
                                 ),
                               ),
@@ -117,33 +138,32 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                                 decoration: const InputDecoration(
                                   hintText: 'password',
                                   border: InputBorder.none,
-                                  prefixIcon: Icon(Icons.lock,
-                                      color: Color.fromARGB(255, 4, 52, 91)),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            const Text("Confirm Password"),
-                            const SizedBox(height: 2.0),
-                            Container(
-                              decoration: BoxDecoration(
-                                color: Colors.amberAccent,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: TextFormField(
-                                obscureText: true,
-                                autofocus: true,
-                                autocorrect: true,
-                                decoration: const InputDecoration(
-                                  hintText: 'confirm password',
-                                  border: InputBorder.none,
-                                  prefixIcon: Icon(Icons.verified_user,
+                                  prefixIcon: Icon(Icons.lock_rounded,
                                       color: Color.fromARGB(255, 4, 52, 91)),
                                 ),
                               ),
                             ),
                           ],
                         ),
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const LoginScreen()),
+                                );
+                              },
+                              child: const Text(
+                                  "Already have an account, Login here.."),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -183,15 +203,9 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                 height: 55,
                 width: 272,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color.fromARGB(255, 4, 52, 91),
-                        Color.fromARGB(255, 29, 98, 154),
-                      ],
-                    )),
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: const Color.fromARGB(255, 4, 52, 91),
+                ),
                 child: const Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

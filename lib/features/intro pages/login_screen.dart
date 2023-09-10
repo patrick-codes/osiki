@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:osiki/home.dart';
-import 'package:osiki/intro%20pages/register_screen.dart';
+import 'package:osiki/features/navigations/home.dart';
+import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Index Number"),
+                          const Text("Email"),
                           const SizedBox(height: 2.0),
                           Container(
                             decoration: BoxDecoration(
@@ -90,9 +90,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               autofocus: true,
                               autocorrect: true,
                               decoration: const InputDecoration(
-                                hintText: 'index number',
+                                hintText: 'email',
                                 border: InputBorder.none,
-                                prefixIcon: Icon(Icons.email,
+                                prefixIcon: Icon(Icons.mail,
                                     color: Color.fromARGB(255, 4, 52, 91)),
                               ),
                             ),
@@ -112,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               decoration: const InputDecoration(
                                 hintText: 'password',
                                 border: InputBorder.none,
-                                prefixIcon: Icon(Icons.lock,
+                                prefixIcon: Icon(Icons.lock_rounded,
                                     color: Color.fromARGB(255, 4, 52, 91)),
                               ),
                             ),
