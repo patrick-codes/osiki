@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:osiki/features/intro%20pages/login_screen.dart';
 
+import '../../api/services/auth_services.dart';
+
 class RegsiterScreen extends StatefulWidget {
   const RegsiterScreen({super.key});
 
@@ -9,6 +11,19 @@ class RegsiterScreen extends StatefulWidget {
 }
 
 class _RegsiterScreenState extends State<RegsiterScreen> {
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final AuthService authservcie = AuthService();
+
+  void signupUser() {
+    authservcie.singUpUser(
+        context: context,
+        username: usernameController.text,
+        email: emailController.text,
+        password: passwordController.text);
+  }
+
   final bool _isLoading = false;
   void loadState(index) {
     setState(() {
@@ -85,7 +100,7 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Name"),
+                            const Text("Username"),
                             const SizedBox(height: 2.0),
                             Container(
                               decoration: BoxDecoration(
@@ -93,10 +108,10 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: TextFormField(
-                                autofocus: true,
+                                controller: usernameController,
                                 autocorrect: true,
                                 decoration: const InputDecoration(
-                                  hintText: 'name',
+                                  hintText: 'username',
                                   border: InputBorder.none,
                                   prefixIcon: Icon(Icons.person_2,
                                       color: Color.fromARGB(255, 4, 52, 91)),
@@ -112,8 +127,7 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: TextFormField(
-                                obscureText: true,
-                                autofocus: true,
+                                controller: emailController,
                                 autocorrect: true,
                                 decoration: const InputDecoration(
                                   hintText: 'email',
@@ -132,8 +146,8 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: TextFormField(
+                                controller: passwordController,
                                 obscureText: true,
-                                autofocus: true,
                                 autocorrect: true,
                                 decoration: const InputDecoration(
                                   hintText: 'password',
@@ -192,13 +206,13 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: GestureDetector(
-              onTap: () => {
-                /*Navigator.push(
+              onTap: signupUser,
+              /*Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const MyHomePage()),
                     ),*/
-              },
+
               child: Container(
                 height: 55,
                 width: 272,

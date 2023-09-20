@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:osiki/providers/user_providers.dart';
+import 'package:provider/provider.dart';
 import 'package:osiki/features/intro%20pages/register_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (_) => UserProvider(),
+    )
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
