@@ -1,10 +1,15 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:osiki/model/user_model.dart';
 import 'package:osiki/utilities/utilities.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../constants/conts.dart';
+import '../../features/intro pages/login_screen.dart';
+import '../../providers/user_providers.dart';
 
-class AuthService {
+class SignUpAuthService {
   void singUpUser({
     required BuildContext context,
     required String username,
@@ -19,6 +24,8 @@ class AuthService {
           token: '',
           password: password);
 
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
+      final navigator = Navigator.of(context);
       http.Response res = await http.post(
           Uri.parse('${Constants.uri}/api/signup'),
           body: user.toJson(),
@@ -30,8 +37,13 @@ class AuthService {
           response: res,
           context: context,
           onSuccess: () {
-            showSnackBar(context,
-                'account created succesfully. Login with same credentials');
+            navigator.pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+              (route) => false,
+            );
+            showSnackBar(context, 'Account Created Succesfully !! Now Login');
           });
     } catch (e) {
       showSnackBar(context, e.toString());

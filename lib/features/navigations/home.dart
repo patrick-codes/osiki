@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'map_page.dart';
 import 'video_call.dart';
 
@@ -21,19 +24,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 */
   void _snackBar(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        behavior: SnackBarBehavior.fixed,
-        content: Center(
-          child: (Text(
-            "Emergency Button Activated!!",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          )),
-        ),
-        backgroundColor: Colors.green,
+    showTopSnackBar(
+      Overlay.of(context),
+      const CustomSnackBar.success(
+        message: "Emergency Activation Successful!!",
       ),
     );
   }
@@ -73,9 +67,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
-                        Icons.video_call_rounded,
-                        size: 45,
+                      FaIcon(
+                        FontAwesomeIcons.video,
+                        size: 30,
                         color: Colors.white,
                       ),
                       Text(
@@ -104,15 +98,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.call_rounded,
-                      size: 45,
+                    FaIcon(
+                      FontAwesomeIcons.phone,
+                      size: 30,
                       color: Colors.white,
                     ),
                     Text(
                       "Voice Call",
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.white),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ],
                 ),
@@ -199,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         shadowColor: Colors.white,
       ),
-      backgroundColor: const Color.fromARGB(255, 4, 52, 91),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -245,7 +241,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(
                       height: 1.2,
                       fontSize: 20,
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 4, 52, 91),
                     ),
                   ),
                 ],
@@ -256,65 +252,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 showDialog(
                   context: context,
                   builder: (buildContext) => AlertDialog(
-                    icon: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: const Color.fromARGB(255, 4, 52, 91),
-                      ),
-                      child: const Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.alarm,
-                            size: 40,
-                            color: Colors.red,
-                          ),
-                          Text(
-                            "HELP UNDERWAY...!!",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          )
-                        ],
+                    icon: const Center(
+                      child: FaIcon(
+                        color: Colors.green,
+                        size: 50,
+                        FontAwesomeIcons.motorcycle,
                       ),
                     ),
-                    backgroundColor: Colors.white,
-                    //elevation: 24.0,
                     title: const Center(
                       child: Text(
                         "A panic button has being created for you. Help is underway. Stay calm and expect help.Thank You!!",
                         style: TextStyle(
-                          color: Colors.green,
+                          color: Color.fromARGB(255, 4, 52, 91),
                           fontWeight: FontWeight.w500,
                           fontSize: 15,
                         ),
                       ),
-                    ),
-                    content: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "5",
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red,
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          "Minutes",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Color.fromARGB(255, 4, 52, 91),
-                          ),
-                        )
-                      ],
                     ),
                     actions: [
                       Row(
@@ -330,35 +283,49 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               );
                             },
-                            child: const Row(
-                              children: [
-                                Icon(
-                                  Icons.location_searching,
-                                  color: Color.fromARGB(255, 4, 52, 91),
+                            child: Container(
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 4, 52, 91),
+                                borderRadius: BorderRadius.circular(6.0),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    SizedBox(height: 9),
+                                    FaIcon(
+                                      FontAwesomeIcons.map,
+                                      color: Colors.amberAccent,
+                                    ),
+                                    SizedBox(width: 2),
+                                    Text(
+                                      "Track Help",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.amberAccent,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(width: 2),
-                                Text(
-                                  "Trace Help",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromARGB(255, 4, 52, 91),
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
                           ),
                           Container(
-                            width: 82,
+                            height: 40,
                             decoration: BoxDecoration(
                               color: const Color.fromARGB(255, 4, 52, 91),
                               borderRadius: BorderRadius.circular(6.0),
                             ),
                             child: const Center(
-                              child: Text(
-                                "Check Log",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.amberAccent,
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Check Log",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.amberAccent,
+                                  ),
                                 ),
                               ),
                             ),
@@ -411,21 +378,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                _snackBar(context);
-              },
-              style: const ButtonStyle(),
-              child: const Text(
-                "ACTIVATE EMERGENCY",
-                style: TextStyle(),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: GestureDetector(
+                onTap: () {
+                  _snackBar(context);
+                },
+                child: Container(
+                  height: 40,
+                  width: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "ACTIVATE EMERGENCY",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 4, 52, 91),
         onPressed: () {
           _bottomDraw(context);
         },
@@ -438,7 +423,7 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Call',
         child: const Icon(
           Icons.call_rounded,
-          color: Colors.red,
+          color: Colors.white,
           size: 35,
         ),
       ),

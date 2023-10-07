@@ -2,18 +2,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 void showSnackBar(BuildContext context, String text) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: AwesomeSnackbarContent(
-        title: "",
-        message: (text),
-        contentType: ContentType.success,
-      ),
-      behavior: SnackBarBehavior.floating,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
+  showTopSnackBar(
+    Overlay.of(context),
+    CustomSnackBar.success(
+      message: (text),
     ),
   );
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:osiki/features/intro%20pages/login_screen.dart';
-
-import '../../api/services/auth_services.dart';
+import '../../api/services/signup_auth_service.dart';
 
 class RegsiterScreen extends StatefulWidget {
   const RegsiterScreen({super.key});
@@ -14,7 +13,7 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final AuthService authservcie = AuthService();
+  final SignUpAuthService authservcie = SignUpAuthService();
 
   void signupUser() {
     authservcie.singUpUser(
@@ -89,7 +88,7 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                         child: Text(
                           "REGISTRATION",
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 20,
                             color: Color.fromARGB(255, 4, 52, 91),
                             fontWeight: FontWeight.bold,
                           ),
@@ -104,7 +103,10 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                             const SizedBox(height: 2.0),
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.amberAccent,
+                                border: Border.all(
+                                  color: const Color.fromARGB(255, 4, 52, 91),
+                                ),
+                                // color: Colors.amberAccent,
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: TextFormField(
@@ -123,7 +125,10 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                             const SizedBox(height: 2.0),
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.amberAccent,
+                                border: Border.all(
+                                  color: const Color.fromARGB(255, 4, 52, 91),
+                                ),
+                                // color: Colors.amberAccent,
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: TextFormField(
@@ -142,7 +147,10 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                             const SizedBox(height: 2.0),
                             Container(
                               decoration: BoxDecoration(
-                                color: Colors.amberAccent,
+                                border: Border.all(
+                                  color: const Color.fromARGB(255, 4, 52, 91),
+                                ),
+                                // color: Colors.amberAccent,
                                 borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: TextFormField(
@@ -191,13 +199,6 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color.fromARGB(255, 4, 52, 91),
-                      shadows: [
-                        (Shadow(
-                          color: Colors.black,
-                          offset: Offset.zero,
-                          blurRadius: 1.0,
-                        )),
-                      ],
                     ),
                     "By Regsitering an account, you Agree to our Terms and Services. Note: This app does not keep records of your personal data for maulicious purposes. Your personal data is secured. "),
               ),
@@ -207,12 +208,6 @@ class _RegsiterScreenState extends State<RegsiterScreen> {
             padding: const EdgeInsets.all(15.0),
             child: GestureDetector(
               onTap: signupUser,
-              /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MyHomePage()),
-                    ),*/
-
               child: Container(
                 height: 55,
                 width: 272,

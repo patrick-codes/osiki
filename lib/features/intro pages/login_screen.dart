@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:osiki/features/navigations/home.dart';
+import '../../api/services/signin_auth_service.dart';
+import '../../api/services/signup_auth_service.dart';
+import '../navigations/home.dart';
 import 'register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -10,6 +12,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController2 = TextEditingController();
+  final TextEditingController passwordController2 = TextEditingController();
+  final SignInAuthService authservice2 = SignInAuthService();
+
+  void signinUser() {
+    authservice2.signInUser(
+      context: context,
+      email: emailController2.text,
+      password: passwordController2.text,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         "LOGIN",
                         style: TextStyle(
-                          fontSize: 28,
+                          fontSize: 20,
                           color: Color.fromARGB(255, 4, 52, 91),
                           fontWeight: FontWeight.bold,
                         ),
@@ -83,11 +97,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 2.0),
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.amberAccent,
+                              border: Border.all(
+                                color: Color.fromARGB(255, 4, 52, 91),
+                              ),
+                              //color: Colors.amberAccent,
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: TextFormField(
-                              autofocus: true,
+                              controller: emailController2,
                               autocorrect: true,
                               decoration: const InputDecoration(
                                 hintText: 'email',
@@ -102,12 +119,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 2.0),
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.amberAccent,
+                              border: Border.all(
+                                color: const Color.fromARGB(255, 4, 52, 91),
+                              ),
+                              //color: Colors.amberAccent,
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: TextFormField(
+                              controller: passwordController2,
                               obscureText: true,
-                              autofocus: true,
                               autocorrect: true,
                               decoration: const InputDecoration(
                                 hintText: 'password',
@@ -122,13 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 10),
                     GestureDetector(
-                      onTap: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MyHomePage()),
-                        )
-                      },
+                      onTap: signinUser,
                       child: Container(
                         height: 55,
                         width: 272,
@@ -157,8 +171,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegsiterScreen()),
+                                  builder: (context) => const RegsiterScreen(),
+                                ),
                               );
                             },
                             child: const Text(
@@ -180,13 +194,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color.fromARGB(255, 4, 52, 91),
-                      shadows: [
-                        (Shadow(
-                          color: Colors.black,
-                          offset: Offset.zero,
-                          blurRadius: 1.0,
-                        )),
-                      ],
                     ),
                     "By Logging in, you Agree to our Terms and Services. Note: This app does not keep records of your personal data for maulicious purposes. Your personal data is secured. "),
               ),
